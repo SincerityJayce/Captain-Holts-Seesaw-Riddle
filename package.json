@@ -1,0 +1,19 @@
+{
+  "name": "holts-islander-riddle",
+  "version": "1.0.0",
+  "description": "simulation of captain holts islander seesaw riddle from Brookyn Nine-Nine, season 2, episode 18.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run index.js"
+  },
+  "keywords": [
+    "riddle",
+    "holt",
+    "brooklyn",
+    "nine-nine",
+    "islander",
+    "seesaw"
+  ],
+  "author": "vince scanlan",
+  "license": "ISC"
+}
