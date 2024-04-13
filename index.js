@@ -4,4 +4,4 @@ import { answerToHoltsIslanderRiddle } from './VincesAnswerToHoltsIslanderRiddle
 export { CaptainHolts_islanderRiddle, answerToHoltsIslanderRiddle }
 
 
-CaptainHolts_islanderRiddle(answerToHoltsIslanderRiddle)
+CaptainHolts_islanderRiddle(answerToHoltsIslanderRiddle) 
