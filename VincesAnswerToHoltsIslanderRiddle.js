@@ -77,6 +77,7 @@ export function answerToHoltsIslanderRiddle({islanders, seesaw}){
   // first seesaw was even, the unique islander must be in the remnant
   let [onlyUnmeasuredIslander,...c ] = firstRemnant
   let known = [...a,...b]
+
   let secondMeasurement = seesaw(c, known.slice(-3))
 
   if(secondMeasurement === "balanced"){

@@ -6,46 +6,60 @@
 // The island has no escapes, but there is a see-saw. 
 // The exciting catch? You can only use it three times"
 
+export function CaptainHolts_islanderRiddle(proposedAnswer){
+ var succesfulltests = 0 
+ const totaltests = forEveryPossibleCombination([[slightlyHeavier,slightlyLighter],islanders],
+  (weightDifference, uniqueIslander) => {  timesUsedSeesaw = 0;
+  resetIslanderWeights()[uniqueIslander] += weightDifference ;
+  if(proposedAnswer({islanders, seesaw})===uniqueIslander ) succesfulltests++
+ })
+
+ console.log(succesfulltests === totaltests?
+ 'The riddle was solved for all possible scenarios!':
+ 'This answer did not solve the riddle for all possible scenarios')
+
+ return succesfulltests === totaltests
+}
 
 
-export const islanders = Array.from({length: 12}, ()=>({weight:5}));
-var timesUsedSeesaw = 0 //reset at end of each test
+//Islanders
+export const islanders = Array.from(Array(12).keys());
+const islanderWeights = {}
+let standardWeight = 5
+let slightlyHeavier = 1;
+let slightlyLighter = -1;
+function resetIslanderWeights(){
+ islanders.forEach((islander) => islanderWeights[islander] = standardWeight)
+ return islanderWeights
+}
+
+
+//Seesaw
+var timesUsedSeesaw = 0 //reset at start of each test
 export function seesaw(left, right){
+ if (timesUsedSeesaw === 3) throw new Error("You used the seesaw too many times")
  // returns wether the left side went up, down, or stayed even
  timesUsedSeesaw++;
- let result = left.reduce((a,b) => a + b.weight, 0) - right.reduce((a,b) => a + b.weight, 0)
+ let result = left.reduce((a,b) => a + islanderWeights[b], 0) - right.reduce((a,b) => a + islanderWeights[b], 0)
  if (result === 0) return "balanced";
  if (result > 0) return "left";
  if (result < 0) return "right";
 }
 
-export function CaptainHolts_islanderRiddle(proposedAnswer){
- var scoreTracker = 0 
- 
- //test all possible scenarios
- const slightlyHeavier = 1;
- const slightlyLighter = -1;
- [slightlyHeavier, slightlyLighter].forEach((possibleSlightDifferenceInWeight) => {
-   islanders.forEach((uniqueIslander) => {
- 
-   //this test runs 24 times to test each possible distribution of a slightly heavier or lighter islander among the group of 12
- 
-   uniqueIslander.weight += possibleSlightDifferenceInWeight //make islander unique
- 
-   let success = timesUsedSeesaw<=3 && proposedAnswer({islanders, seesaw})===uniqueIslander //attempt to find him using the seesaw
- 
-   if(success)scoreTracker++ // log success/failure
-   // console.log(success? 'Test Passed' : 'Test Failed')
- 
-   //reset these for next test
-   uniqueIslander.weight -= possibleSlightDifferenceInWeight
-   timesUsedSeesaw = 0
+
+// overly fancy function I felt like writing
+function forEveryPossibleCombination(arrays, cb){
+ let timesRun = 0
+ let runCB = (...args) => {  timesRun++ ;  cb(...args) }
+
+ function nestedForEach(arrays,args=[]){
+  let arr = arrays.pop()
+  arr.forEach((arg) => {
+   arrays.length === 0? runCB(...args, arg): 
+   nestedForEach([...arrays], [...args, arg])
   })
- })
- // console.log("score:",scoreTracker, "out of", 24)
- if (scoreTracker === 24){ 
-  console.log('The riddle was solved for all possible scenarios!'); return true
- } else {
-  console.log('This answer did not solve the riddle for all possible scenarios'); return false
  }
+ nestedForEach(arrays.reverse())
+ return timesRun
 }
+
