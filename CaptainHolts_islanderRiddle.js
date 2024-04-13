@@ -19,7 +19,7 @@ function seesaw(left, right){
  if (result < 0) return "right";
 }
 
-export function CaptainHolts_islanderRiddle(findUniqueIslander){
+export function CaptainHolts_islanderRiddle(proposedAnswer){
  var scoreTracker = 0 
  
  //test all possible scenarios
@@ -32,7 +32,7 @@ export function CaptainHolts_islanderRiddle(findUniqueIslander){
  
    uniqueIslander.weight += possibleSlightDifferenceInWeight //make islander unique
  
-   let success = timesUsedSeesaw<=3 && findUniqueIslander({islanders, seesaw})===uniqueIslander //attempt to find him using the seesaw
+   let success = timesUsedSeesaw<=3 && proposedAnswer({islanders, seesaw})===uniqueIslander //attempt to find him using the seesaw
  
    if(success)scoreTracker++ // log success/failure
    // console.log(success? 'Test Passed' : 'Test Failed')
