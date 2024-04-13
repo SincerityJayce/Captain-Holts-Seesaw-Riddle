@@ -8,9 +8,9 @@
 
 
 
-const islanders = Array.from({length: 12}, ()=>({weight:5}));
+export const islanders = Array.from({length: 12}, ()=>({weight:5}));
 var timesUsedSeesaw = 0 //reset at end of each test
-function seesaw(left, right){
+export function seesaw(left, right){
  // returns wether the left side went up, down, or stayed even
  timesUsedSeesaw++;
  let result = left.reduce((a,b) => a + b.weight, 0) - right.reduce((a,b) => a + b.weight, 0)
