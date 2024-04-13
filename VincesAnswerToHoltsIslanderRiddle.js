@@ -1,4 +1,4 @@
-// this doucment contains spoilers
+// this doment contains spoilers
 
 
 
@@ -78,7 +78,6 @@ export function answerToHoltsIslanderRiddle({islanders, seesaw}){
   let [onlyUnmeasuredIslander,...c ] = firstRemnant
   let known = [...a,...b]
   let secondMeasurement = seesaw(c, known.slice(-3))
-  console.log({secondMeasurement, firstMeasurement})
 
   if(secondMeasurement === "balanced"){
    return onlyUnmeasuredIslander
@@ -102,7 +101,6 @@ export function answerToHoltsIslanderRiddle({islanders, seesaw}){
 
    let secondMeasurement = seesaw([known.shift(),...b1s], [...b2s, a1]) //using 1 islander known to be standard weight, to even the scale
 
-   console.log({secondMeasurement, firstMeasurement})
 
    if(secondMeasurement === "balanced"){ // if the wieght is even, the unique islander must be in the remnant
     // we look for the lightest or heaviest islander, based on wether group a went up or down in the first measuremnt
